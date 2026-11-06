@@ -19,7 +19,11 @@ configs/combined.yaml
 configs/combined.generated.yaml
 configs/*.pem
 test/fixtures/audit/vpToken.json
+corp-ca.crt
 
 dist
 dist-ssr
 logs/
+
+# Local Netlify folder
+.netlify

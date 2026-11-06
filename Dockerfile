@@ -8,10 +8,21 @@ RUN mkdir -p /home/node/app && chown -R node:node /home/node/app
 WORKDIR /home/node/app
 
 FROM base AS build-setup
+# TEMP(corp-network): trust corporate TLS-intercepting CA for apk/npm
+COPY corp-ca.crt /usr/local/share/ca-certificates/corp-ca.crt
+RUN set -eux; \
+  for f in /etc/ssl/certs/ca-certificates.crt /etc/ssl/cert.pem; do \
+    if [ -f "$f" ] && [ ! -L "$f" ]; then \
+      printf '\n' >> "$f"; \
+      cat /usr/local/share/ca-certificates/corp-ca.crt >> "$f"; \
+    fi; \
+  done
 RUN apk add --no-cache git bash
 
 FROM build-setup AS build
 ARG NODE_AUTH_TOKEN
+# TEMP(corp-network): make Node/npm trust corporate CA
+ENV NODE_EXTRA_CA_CERTS=/usr/local/share/ca-certificates/corp-ca.crt
 USER node
 COPY --chown=node:node . .
 RUN mv dev.js index.js

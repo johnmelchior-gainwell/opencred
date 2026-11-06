@@ -104,6 +104,7 @@
     "qrcode": "^1.5.4",
     "quasar": "^2.15.4",
     "reflect-metadata": "^0.2.2",
+    "serverless-http": "^4.0.0",
     "swagger-jsdoc": "^6.3.0",
     "swagger-ui-express": "^5.0.1",
     "tailwind-clip-path": "^1.0.0",
@@ -127,6 +128,7 @@
     "eslint": "^10.9.0",
     "expect.js": "^0.3.1",
     "klona": "^2.0.6",
+    "netlify-cli": "^27.16.2",
     "sinon": "^22.1.0"
   },
   "mocha": {

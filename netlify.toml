@@ -1,0 +1,22 @@
+# OpenCred on Netlify — EXPERIMENTAL
+#
+# The whole bedrock/Express backend runs as a single Netlify Function
+# (netlify/functions/server.js). There is no separate static frontend
+# build artifact for this app (the webpack bundle is served by the Express
+# app itself via @bedrock/views), so every request is routed to the
+# function rather than to a static `publish` directory.
+
+[build]
+  command = "npm ci && node --preserve-symlinks dev.js bundle --webpack-mode production --bundle-mode production"
+  functions = "netlify/functions"
+  # placeholder: the function serves everything, nothing is statically published
+  publish = ".cache/bedrock-webpack"
+
+[functions]
+  node_bundler = "esbuild"
+  included_files = [".cache/bedrock-webpack/**", ".cache/bedrock-views/**"]
+
+[[redirects]]
+  from = "/*"
+  to = "/.netlify/functions/server/:splat"
+  status = 200
