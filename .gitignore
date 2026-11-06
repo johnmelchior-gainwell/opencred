@@ -23,3 +23,5 @@ test/fixtures/audit/vpToken.json
 dist
 dist-ssr
 logs/
+netlify-dist
+.netlify

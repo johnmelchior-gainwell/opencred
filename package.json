@@ -13,6 +13,7 @@
     "generate:prime256v1": "node ./scripts/generatePrime256v1Key.js",
     "generate:reader-cert": "node ./scripts/generate-reader-cert.js",
     "generate:rsa256": "node ./scripts/generateRSA256Key.js",
+    "build:netlify": "node dev.js bundle --webpack-mode production --bundle-mode production && node scripts/build-netlify.js",
     "tunnel": "lt -p 22080",
     "audit-dc-api": "node ./scripts/audit-dc-api-request.js",
     "audit-vp": "node ./test/utils/auditVpToken.js",

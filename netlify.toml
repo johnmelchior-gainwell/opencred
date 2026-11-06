@@ -1,0 +1,16 @@
+## Netlify deploy (static frontend shell only)
+#
+# OpenCred's backend (workflows/OIDC/exchanges, MongoDB) is a persistent
+# Node server (see dev.js / lib/index.js, @bedrock/server) and cannot run on
+# Netlify. This config only publishes the Vue SPA shell produced by the
+# webpack production bundle - see scripts/build-netlify.js. API requests made
+# by the SPA will fail unless a backend is hosted elsewhere and reachable.
+
+[build]
+  command = "npm run build:netlify"
+  publish = "netlify-dist"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
